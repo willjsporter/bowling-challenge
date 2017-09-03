@@ -6,18 +6,17 @@ function Game() {
 };
 
 Game.prototype.bowl = function(value){
+  if(!this.allowedToRoll){throw new Error("Game is over, no more bowling!")}
+
   var frameNo = this.framelist.length
   if(frameNo!==0){
     var notStrike = (this.framelist.last()[0]!==10);
-    var secondGo = (this.framelist.last().last()==null);
+    var secondGo = (this.framelist.last()[1]==null);
   }
 
-    if(frameNo===0){
-    this.framelist.push([value,null]);
-    }
-      // if(this.framelist[0][0]===null){
-      // this.framelist[0][0] = value;
-      // }
+  if(frameNo===0){
+  this.framelist.push([value,null]);
+  }
   else if(frameNo<10 && secondGo && notStrike) {
     this.framelist.last()[1] = value;
   }
@@ -29,10 +28,13 @@ Game.prototype.bowl = function(value){
   }
   else if (frameNo===10 && secondGo){
     this.framelist.last()[1]=value
+    if(this.framelist.last()[0]+this.framelist.last()[1]<10){
+      this.allowedToRoll=false
+    }
   }
   else if(frameNo===10 && this.framelist.last()[2]===null){
-    framelist.last()[2] = value;
-    //end game by flicking this.allowedToRoll switch
+    this.framelist.last()[2] = value;
+    this.allowedToRoll=false
   }
 //either last one is [x,null] or [x,y] at this stage. Want to update if it's [x,y] and push new frame if it's [x,null]
   if(this.scorecard.length===10){this.scorecard[10]+=value;}

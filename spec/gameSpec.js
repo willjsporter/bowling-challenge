@@ -31,6 +31,25 @@ describe("Game", function() {
     expect(game.scorecard[1]).toEqual(18);
   });
 
+  describe("should prevent the player from bowling at the end of the tenth frame", function() {
 
+    beforeEach(function() {
+      for(i=0;i<18; i++){game.bowl(4)}
+    });
+
+    it("after 2 rolls if a strike or spare has not been acheived", function() {
+      game.bowl(1);
+      game.bowl(8);
+      expect(function() {game.bowl(0)}).toThrowError("Game is over, no more bowling!");
+    });
+
+    it("after 3 rolls if a strike or spare has been acheived", function() {
+      game.bowl(10);
+      game.bowl(8);
+      // expect(try {game.bowl(1)}; catch(err) {return err}).toBe(null);
+      game.bowl(1);
+      expect(function(){game.bowl(0)}).toThrowError("Game is over, no more bowling!");
+    });
+  });
 
 });
