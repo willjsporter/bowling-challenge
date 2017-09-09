@@ -78,3 +78,4 @@ if (!Array.prototype.last){
   };
 
 };
+module.exports = {Game: "Game"}
