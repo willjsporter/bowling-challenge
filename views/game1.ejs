@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+table#t01 {
+  width: 100%;
+  background-color: #f1f1c1;
+}
+</style>
+
+</head>
+<body class="container">
+
+We are now bowling
+<table>
+<tr>
+    <th>Player</th>
+    <%for(i=0;i<10;i++){%>
+      <th>
+        <%="Frame "+(i+1)%>
+      </th>
+    <%}%>
+  </tr>
+  <tr>
+    <td>Will</td>
+    <%for(i=0;i<10;i++){%>
+    <td>
+      <%if(typeof(game.scorecard[i])!==undefined){%>
+      <%=game.scorecard[i]%>
+      <%} else{%>
+      <%="..."%>
+      <%}%>
+    </td>
+    <%};%>
+  </tr>
+  <tr>
+    <td>Framelist</td>
+    <%for(i=0;i<10;i++){%>
+    <td>
+      <%if(typeof(game.framelist[i])!=='undefined'){%>
+      <%=game.framelist[i][0]%>
+      <%=game.framelist[i][1]%>
+      <%} else{%>
+      <%="..."%>
+      <%}%>
+    </td>
+    <%};%>
+  </tr>
+</table>
+
+<!-- should jquery the below stuff -->
+<form action='/roll' method = 'post'>
+  <%for(i=0; i<11; i++){%>
+    <button name="rollValue" type="submit" value='<%=i%>'>Bowl <%=i%></button>
+  <%};%>
+</form>
+
+</body>
+</html>

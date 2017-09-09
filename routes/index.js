@@ -6,31 +6,20 @@ router.get('/', function (req, res) {
   res.render('homepage');
 });
 
-gamea = 123;
 router.post('/', function (req, res) {
-  game = new Game.Game
+  game = new Game
+  console.log(game)
   //currently global - want to use sessions
   res.redirect('game');
 });
 
 router.get('/game', function (req, res) {
-  res.render('test');
+  res.render('game1');
 });
 
-// router.post('/', function (req, res) {
-//   User.findOne({username: req.body.username, password: req.body.password}, function (err, userexist){
-//    if (err) {
-//      console.log(err);
-//    };
-//    if (!userexist) {
-//      res.render('login-failure')
-//    } else {
-//      res.render('firstpage-success', {data: userexist})
-//      theUser = userexist
-//    };
-// });
-// });
-
-
+router.post('/roll', function (req, res) {
+  game.bowl(parseInt(req.body.rollValue))
+  res.redirect('game');
+});
 
 module.exports = router;

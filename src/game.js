@@ -78,4 +78,8 @@ if (!Array.prototype.last){
   };
 
 };
-module.exports = {Game: "Game"}
+module.exports = Game
+// {
+//   Game: Game,
+//   bowl:
+// }
